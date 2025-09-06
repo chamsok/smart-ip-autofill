@@ -16,8 +16,7 @@ A privacy-first extension to capture and autofill form data across websites. Cre
    - [Apply a Profile](#apply-a-profile)
    - [URL Autofill Modes](#url-autofill-modes)
 7. [Validation Rules](#validation-rules)
-8. [Troubleshooting](#troubleshooting)
-9. [Changelog (1.0.5)](#changelog-105)
+8. [Changelog (1.0.5)](#changelog-105)
 
 ---
 
@@ -88,13 +87,6 @@ See PERMISSIONS_JUSTIFICATION.md for details.
 - On TikTok pages: only `tiktok.com` URLs
 - Limits: 30 (FB/IG) or 100 (default/TikTok)
 - The popup disables the action button until inputs are valid
-
-## Troubleshooting
-
-- Button disabled? Check the URL counter message for validation errors or limits
-- Nothing fills? Ensure the page isn’t a restricted scheme (e.g., Chrome Web Store)
-- SPA pages sometimes need a re‑open of the popup after navigation
-- Still stuck? Open DevTools Console for messages and try again
 
 ## Changelog (1.0.5)
 
