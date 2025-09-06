@@ -8,15 +8,17 @@ A privacy-first extension to capture and autofill form data across websites. Cre
 
 1. [Features](#features)
 2. [Supported Sites](#supported-sites)
-3. [Security & Privacy](#security--privacy)
-4. [Permissions](#permissions)
-5. [Install (Unpacked)](#install-unpacked)
-6. [How to Use](#how-to-use)
+3. [Requirements](#requirements)
+4. [Security & Privacy](#security--privacy)
+5. [Permissions](#permissions)
+6. [Install (Unpacked)](#install-unpacked)
+7. [How to Use](#how-to-use)
    - [Create a Profile](#create-a-profile)
    - [Apply a Profile](#apply-a-profile)
    - [URL Autofill Modes](#url-autofill-modes)
 7. [Validation Rules](#validation-rules)
-8. [Changelog (1.0.5)](#changelog-105)
+8. [Troubleshooting](#troubleshooting)
+9. [Changelog (1.0.5)](#changelog-105)
 
 ---
 
@@ -35,12 +37,18 @@ A privacy-first extension to capture and autofill form data across websites. Cre
 - TikTok (optimized; de‑duplicated newline‑joined list)
 - Any other website (generic strategy; 100 URL limit)
 
+## Requirements
+
+- Chrome 114+ (Manifest V3 service worker requires minimum Chrome version 114)
+
 ## Security & Privacy
 
 - All data remains in your browser via Chrome storage (may sync via Chrome Sync)
 - Profiles are encrypted at rest using Web Crypto (AES‑GCM) with a per‑device key
 - Sensitive fields (e.g., passwords, tokens, SSN) are automatically ignored on capture
 - Strict Content Security Policy for extension pages; no remote scripts
+
+Privacy Policy: See `PRIVACY_POLICY.md`. For Chrome Web Store, publish the policy at a public URL and link it in the listing.
 
 ## Permissions
 
@@ -49,7 +57,13 @@ A privacy-first extension to capture and autofill form data across websites. Cre
 - `storage`: Persist profiles and settings locally
 - `notifications`: Optional user alerts for critical background errors
 
-See PERMISSIONS_JUSTIFICATION.md for details.
+See `PERMISSIONS_JUSTIFICATION.md` for details.
+
+### Data Safety (for Chrome Web Store)
+- Data collected: None (local-only)
+- Data sharing/sale: None
+- Purpose: On-device functionality only
+- User deletion: Yes (delete profiles in UI or uninstall)
 
 ## Install (Unpacked)
 
@@ -87,6 +101,13 @@ See PERMISSIONS_JUSTIFICATION.md for details.
 - On TikTok pages: only `tiktok.com` URLs
 - Limits: 30 (FB/IG) or 100 (default/TikTok)
 - The popup disables the action button until inputs are valid
+
+## Troubleshooting
+
+- Button disabled? Check the URL counter message for validation errors or limits
+- Nothing fills? Ensure the page isn’t a restricted scheme (e.g., Chrome Web Store)
+- SPA pages sometimes need a re‑open of the popup after navigation
+- Still stuck? Open DevTools Console for messages and try again
 
 ## Changelog (1.0.5)
 
