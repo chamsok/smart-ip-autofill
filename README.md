@@ -18,16 +18,16 @@ A privacy-first extension to capture and autofill form data across websites. Cre
    - [URL Autofill Modes](#url-autofill-modes)
 7. [Validation Rules](#validation-rules)
 8. [Troubleshooting](#troubleshooting)
-9. [Changelog (1.0.5)](#changelog-105)
+9. [Changelog (1.0.7)](#changelog-107)
 
 ---
 
 ## Features
 
-- Secure profiles stored locally (encrypted at rest with a per‑device key)
+- Secure profiles stored locally (attempts to encrypt at rest with a per‑device key)
 - Smart form detection: names, ids, placeholders, labels, and fuzzy matching
 - Robust autofill for inputs, selects (single & multi), checkboxes, and radios
-- Platform-aware URL filling (Facebook/Instagram, TikTok, or any site)
+- Platform-aware URL filling (Facebook/Instagram, TikTok, and other sites with standard forms)
 - Real‑time validation and clear inline feedback in the popup
 - No sign‑in required, no tracking, no external data transfers
 
@@ -35,7 +35,7 @@ A privacy-first extension to capture and autofill form data across websites. Cre
 
 - Facebook and Instagram (optimized; 30 URL limit; one URL per textarea if present)
 - TikTok (optimized; de‑duplicated newline‑joined list)
-- Any other website (generic strategy; 100 URL limit)
+- Many other websites with standard HTML forms (generic strategy; 100 URL limit). Functionality may vary and is not guaranteed on every site.
 
 ## Requirements
 
@@ -44,8 +44,8 @@ A privacy-first extension to capture and autofill form data across websites. Cre
 ## Security & Privacy
 
 - All data remains in your browser via Chrome storage (may sync via Chrome Sync)
-- Profiles are encrypted at rest using Web Crypto (AES‑GCM) with a per‑device key
-- Sensitive fields (e.g., passwords, tokens, SSN) are automatically ignored on capture
+- Profiles are encrypted at rest when possible using Web Crypto (AES‑GCM) with a per‑device key
+- Attempts to ignore common sensitive fields (e.g., passwords, tokens, SSN) during capture
 - Strict Content Security Policy for extension pages; no remote scripts
 
 Privacy Policy: See `PRIVACY_POLICY.md`. For Chrome Web Store, publish the policy at a public URL and link it in the listing.
@@ -55,7 +55,6 @@ Privacy Policy: See `PRIVACY_POLICY.md`. For Chrome Web Store, publish the polic
 - `activeTab`: Interact with the current page when you capture/apply data
 - `scripting`: Inject content scripts on demand to read/fill forms
 - `storage`: Persist profiles and settings locally
-- `notifications`: Optional user alerts for critical background errors
 
 See `PERMISSIONS_JUSTIFICATION.md` for details.
 
@@ -92,7 +91,7 @@ See `PERMISSIONS_JUSTIFICATION.md` for details.
 
 - Facebook/Instagram: auto‑detected; 30 URL limit; one URL per textarea if multiple are present
 - TikTok: auto‑detected; de‑duplicated list pasted into the TikTok URL textarea
-- Other sites: generic detection; 100 URL limit; URLs filled into URL‑related fields
+- Other sites: generic detection; 100 URL limit; URLs filled into URL‑related fields. Functionality may vary by site and is not guaranteed on every site
 
 ## Validation Rules
 
@@ -109,10 +108,10 @@ See `PERMISSIONS_JUSTIFICATION.md` for details.
 - SPA pages sometimes need a re‑open of the popup after navigation
 - Still stuck? Open DevTools Console for messages and try again
 
-## Changelog (1.0.5)
+## Changelog (1.0.7)
 
 - Added TikTok support with dedicated handling
-- Profiles encrypted at rest (AES‑GCM via Web Crypto)
+- Added at‑rest encryption (AES‑GCM via Web Crypto) when possible
 - Centralized sanitization and URL validation; stricter platform URL rules
 - Safer popup rendering (no risky innerHTML for profile list)
 - Listener guards for content scripts to avoid duplicate handlers
